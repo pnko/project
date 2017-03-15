@@ -7,7 +7,7 @@ MS_VS/
 *.R
 .Rhistory
 *.RData
-
+.ftpconfig
 
 # Created by https://www.gitignore.io/api/eclipse,java
 

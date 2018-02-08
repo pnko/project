@@ -29,9 +29,9 @@ LENGTH MACHINE_NAME $10.;
 	END;
 
 	SELECT (MACHINE_NAME) ;
-		WHEN ("PAOI")  	NO =1;
-		WHEN ("AEI")  	NO =2;
-		WHEN ("AVI")  	NO =3;
+		WHEN ("a1")  	NO =1;
+		WHEN ("a2")  	NO =2;
+		WHEN ("a3")  	NO =3;
 		OTHERWISE;
 	END;
 

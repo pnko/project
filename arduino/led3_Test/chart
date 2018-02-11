@@ -1,0 +1,41 @@
+proc sgplot data=sashelp.iris;
+  where Species in ("Setosa", "Versicolor");       /* restrict to two groups */
+  histogram SepalLength / group=Species transparency=0.5;       /* SAS 9.4m2 */
+  density SepalLength / type=kernel group=Species; /* overlay density estimates */
+run;
+
+title "PROC SGPANEL with PANELBY statement";
+proc sgpanel data=sashelp.iris;
+  panelby Species / rows=3 layout=rowlattice;
+  histogram SepalLength;
+run;
+
+
+title 'Comparative plots';
+proc univariate data=sashelp.iris noprint;
+class Species;
+var SepalLength;
+histogram SepalLength / vscale=count normal(noprint);
+inset normal(mu sigma);
+run;
+
+/*ods select Comparative plots;*/
+PROC CAPABILITY DATA = sashelp.iris OUTTABLE= aa noprint 
+		CIBASIC(TYPE=TWOSIDED ALPHA=0.05)
+		MU0=0 
+
+;
+	VAR SepalLength ;
+	/*
+	SPEC USL=	-19	 WUSL=2 LUSL=4 	CUSL=RED 
+ 	CRIGHT=YELLOW;*/
+	HISTOGRAM  SepalLength / NORMAL 	( 	W=1 	L=1 	COLOR=BLACK  MU=EST SIGMA=EST noprint ) 
+	CAXIS=PURPLE
+	CTEXT=BLACK
+	CFRAME=WHITE
+	CBARLINE=BLACK
+	CFILL=GRAY
+
+;
+class  Species  ;
+RUN; 
